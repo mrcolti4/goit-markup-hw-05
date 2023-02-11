@@ -13,9 +13,9 @@
     --color-light: #fff;
     --color-footer-link: rgba(255, 255, 255, 0.1);
     --table-items-count: 4;
+    --hover-effect: .25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 /* Variables end */
-
 body {
     font-family: 'Roboto', sans-serif;
     line-height: calc(24 / 16);
@@ -75,11 +75,32 @@ img {
     display: flex;
     gap: 40px;
 }
+.menu-item {
+    position: relative;
+}
+.menu-link::before {
+    content: '';
+    background-color: var(--color-ocean);
+    border-radius: 2px;
+    width: 100%;
+    height: 4px;
+    display: block;
+    position: absolute;
+    bottom: -24px;
+    right: 0;
+    transform-origin: center;
+    transform: scaleX(0);
+    transition: transform var(--hover-effect);
+}
 
-.menu-item {}
+.menu-item:hover .menu-link::before{
+    transform-origin: center;
+    transform: scaleX(1);
+}
 
 .menu-link {
     font-weight: 500;
+    transition: color var(--hover-effect);
 }
 .menu-link:hover {
     color: var(--color-ocean);
@@ -94,7 +115,8 @@ img {
 .contacts-item {}
 
 .contacts-link {
-    color: var(--color-slate)
+    color: var(--color-slate);  
+    transition: color var(--hover-effect);
 }
 .contacts-link:hover {
     color: var(--color-ocean);
@@ -120,6 +142,7 @@ img {
     margin: 0 auto;
     padding: 16px 32px;
     margin-top: 48px;
+    transition: background-color var(--hover-effect);
 }
 .hero-btn:hover,
 .hero-btn:focus {
@@ -239,6 +262,8 @@ img {
 .customers-icon {
     display: block;
     fill: var(--color-light-slate);
+    transition-property: fill, border-color;
+    transition: var(--hover-effect);
 }
 .customers-link:hover,
 .customers-link:hover .customers-icon{
@@ -292,6 +317,7 @@ img {
     padding: 12px;
     background-color: var(--color-iris);
     border-radius: 100%;
+    transition: background-color var(--hover-effect);
 }
 
 .social-link:hover {
@@ -327,6 +353,8 @@ img {
     color: var(--color-iris);
     background-color: var(--color-cloud);
     padding: 12px 24px;
+    transition-property: color, background-color;
+    transition: var(--hover-effect);
 }
 .portfolio-btn:hover,
 .portfolio-btn:focus {
@@ -345,6 +373,7 @@ img {
 
 .portfolio-card {
     flex-basis: calc((100% - (24px * (var(--table-items-count) - 1))) / var(--table-items-count));
+    transition: box-shadow var(--hover-effect);
 }
 .portfolio-card:hover {
     box-shadow: 0px 1px 6px rgba(46, 47, 66, 0.08), 0px 1px 1px rgba(46, 47, 66, 0.16), 0px 2px 1px rgba(46, 47, 66, 0.08);
@@ -363,10 +392,75 @@ img {
 }
 
 .portfolio-tag {}
+.portfolio-thumb {
+    position: relative;
+    overflow: hidden;
+}
+.portfolio-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 40px 32px;
+    background-color: var(--color-iris);
+    color: var(--color-cloud);
+    transform: translateY(100%);
+    transition: transform var(--hover-effect);
+}
+.portfolio-card:hover .portfolio-text {
+    transform: translateY(0);
+}
 /* ============================================================= */
 /* Portfolio html styles ends here */
 /* ============================================================= */
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
 
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: visibility var(--hover-effect), opacity var(--hover-effect);
+}
+.backdrop.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden; 
+}
+.modal {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+    width: 408px;
+    height: 576px;
+    background: #FCFCFC;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 2px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    transition: transform var(--hover-effect), opacity var(--hover-effect);
+}
+.backdrop.is-hidden .modal {
+    transform: translate(-50%, -70%);
+    opacity: 0;
+}
+
+.modal-btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--color-cornflower);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+}
 /* ============================================================= */
 /* Common styles */
 /* ============================================================= */
