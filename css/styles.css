@@ -78,7 +78,7 @@ img {
 .menu-item {
     position: relative;
 }
-.menu-link::before {
+.menu-link.current::before {
     content: '';
     background-color: var(--color-ocean);
     border-radius: 2px;
@@ -86,16 +86,8 @@ img {
     height: 4px;
     display: block;
     position: absolute;
-    bottom: -24px;
+    bottom: -25px;
     right: 0;
-    transform-origin: center;
-    transform: scaleX(0);
-    transition: transform var(--hover-effect);
-}
-
-.menu-item:hover .menu-link::before{
-    transform-origin: center;
-    transform: scaleX(1);
 }
 
 .menu-link {
@@ -257,13 +249,13 @@ img {
     padding: 16px 32px;
     border: 1px solid var(--color-light-slate);
     border-radius: 4px;
+    transition: border-color var(--hover-effect);
 }
 
 .customers-icon {
     display: block;
     fill: var(--color-light-slate);
-    transition-property: fill, border-color;
-    transition: var(--hover-effect);
+    transition: fill var(--hover-effect);
 }
 .customers-link:hover,
 .customers-link:hover .customers-icon{
@@ -353,14 +345,15 @@ img {
     color: var(--color-iris);
     background-color: var(--color-cloud);
     padding: 12px 24px;
-    transition-property: color, background-color;
-    transition: var(--hover-effect);
+    border-radius: 4px;
+    transition: color var(--hover-effect), background-color var(--hover-effect), box-shadow var(--hover-effect);
 }
 .portfolio-btn:hover,
 .portfolio-btn:focus {
     color: var(--color-light);
     background-color: var(--color-ocean);
     cursor: pointer;
+    box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 2px 1px rgba(0, 0, 0, 0.08), 0px 2px 2px rgba(0, 0, 0, 0.12);
 }
 .portfolio-cards {
     --table-items-count: 3;
@@ -460,6 +453,12 @@ img {
     height: 24px;
     border-radius: 50%;
     cursor: pointer;
+}
+.modal-btn:active {
+    background: var(--color-ocean);
+}
+.modal-btn:active .modal-icon {
+    fill: var(--color-light);
 }
 /* ============================================================= */
 /* Common styles */
